@@ -43,9 +43,9 @@ def prepare_data(file_in, file_out):
     return (train_in, train_out)
 
 
-def predict(row, weights):
+def predict(X, W):
 
-    activation = weights.dot(row)
+    activation = W.dot(X)
     if activation >= 0.0:
         return 1
     else:
@@ -69,13 +69,13 @@ def train(X, Y, epochs, learning_rate):
     return weights
 
 
-def validate(X, Y, weights):
+def validate(X, Y, W):
     # validate the data and compute the error
 
     errors = []
     for j in range(len(X)):
 
-        error = 1 - int(Y[j, 0] == predict(X[j], weights))
+        error = 1 - int(Y[j, 0] == predict(X[j], W))
         errors.append(error)
 
     avg_error = sum(errors) / float(len(errors))
@@ -83,14 +83,14 @@ def validate(X, Y, weights):
     return avg_error
 
 
-def visualise(X, Y, weights):
+def visualise(X, Y, W):
 
     # plot the input data and decision boundary
     plt.figure()
     plt.scatter(X[:, 1], X[:, 2], marker="o", s=50,
                 linewidths=0, c=Y, cmap=plt.cm.coolwarm)
 
-    Y_line = (-weights[0] - (weights[1] * X[:, 1:])) / weights[2]
+    Y_line = (-W[0] - (W[1] * X[:, 1:])) / W[2]
 
     plt.plot(X[:, 1:], Y_line, "r-")
     plt.title('Classification boundary for the training data')

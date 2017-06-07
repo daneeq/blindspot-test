@@ -19,4 +19,6 @@ The data are stored in a following way:
 
 # Solution
 
-TODO
+Single python file (sgd.py) doing the import and analysis.
+
+In main(), define the input filenames, the learning rate and number of epochs. A simple perceptron algorithm splits the input data into training and cross-validation parts in a 4:1 ratio, trains a vector of weights and returns them. It then validates the weights on the cross-validation set, printing the error rate as a percentage. Finally, it shows a scatter plot of the 2D input data together with a classification line.
